@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 import LinearGradient from 'react-native-linear-gradient';
-import Logo from '~/Assets/logo.png';
-import BackgroundPicture from '~/Assets/fundo.jpg';
+import Logo from '~/Assets/images/logo.png';
+import BackgroundPicture from '~/Assets/images/fundo.jpg';
 
 export const BackgroundImage = styled.ImageBackground.attrs({
   source: BackgroundPicture,
