@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 
+import { TextInput } from 'react-native';
+
 import {
   BackgroundImage,
-  Gradient,
   Container,
   ImageContainer,
-  LogoPizza,
+  Name,
   Email,
+  Gradient,
+  LogoPizza,
   Password,
   EnterButton,
   TextEnter,
-  CreateAccountText,
+  OptionText,
 } from './styles';
 
-export default class Login extends Component {
+export default class CreateAccount extends Component {
   componentDidMount() {}
 
-  goToCreateAccount() {
+  gotToLogin() {
     const { navigation } = this.props;
-    navigation.navigate('CreateAccount');
+    navigation.navigate('Login');
   }
 
   render() {
@@ -30,17 +33,16 @@ export default class Login extends Component {
               <LogoPizza />
             </ImageContainer>
 
+            <Name placeholder="Nome completo" />
             <Email placeholder="Seu e-mail" />
 
             <Password placeholder="Senha secreta" />
 
             <EnterButton>
-              <TextEnter>Entrar</TextEnter>
+              <TextEnter>Criar conta</TextEnter>
             </EnterButton>
 
-            <CreateAccountText onPress={() => this.goToCreateAccount()}>
-              Criar conta gratuita
-            </CreateAccountText>
+            <OptionText onPress={() => this.gotToLogin()}>Já tenho login</OptionText>
           </Container>
         </Gradient>
       </BackgroundImage>

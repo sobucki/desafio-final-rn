@@ -34,6 +34,19 @@ export const LogoPizza = styled.Image.attrs({
   width: 72px;
 `;
 
+export const Name = styled.TextInput.attrs({
+  placeholderTextColor: '#999',
+  autoCorrect: false,
+  autoCompleteType: 'name',
+})`
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  height: 52px;
+  font-size: 16px;
+  color: #333;
+`;
 export const Email = styled.TextInput.attrs({
   placeholderTextColor: '#999',
   autoCapitalize: 'none',
@@ -80,7 +93,7 @@ export const TextEnter = styled.Text`
   font-weight: bold;
   font-size: 16px;
 `;
-export const CreateAccountText = styled.Text`
+export const OptionText = styled.Text`
   color: #fff;
   font-weight: bold;
   font-size: 16px;
