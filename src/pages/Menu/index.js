@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { FlatList } from 'react-native-gesture-handler';
 
 import {
   Container,
@@ -63,6 +61,7 @@ export default class Menu extends Component {
         </HeaderContainer>
         <MenuList
           data={data}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.name)}
           renderItem={({ item }) => (
             <MenuItem>
