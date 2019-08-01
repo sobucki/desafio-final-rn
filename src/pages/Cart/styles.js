@@ -1,39 +1,17 @@
 import styled from 'styled-components/native';
 
-import BackgroundPicture from '~/Assets/images/headers/header-background.png';
-
-export const BackgroundImage = styled.ImageBackground.attrs({
-  source: BackgroundPicture,
-  // resizeMode: 'contain',
-})`
-  flex: 1;
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: 0; */
-`;
-
 export const Container = styled.View`
   flex: 1;
   background-color: #ccc;
-`;
-
-export const HeaderContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px;
+  justify-content: flex-start;
 `;
 
-export const LocalName = styled.Text`
-  font-family: Helvetica-Bold;
-  font-size: 18px;
-  color: #ffffff;
-  letter-spacing: 0;
-  text-align: left;
-`;
+export const ContainerList = styled.View``;
 
 export const MenuList = styled.FlatList`
-  margin: 20px;
+  /* margin: 20px; */
+  /* background-color: blueviolet; */
 `;
 
 export const MenuItem = styled.View`
@@ -54,7 +32,7 @@ export const ItemCover = styled.Image`
 
 export const InfoItemContainer = styled.View`
   flex: 1;
-  height: 80;
+  height: 65;
   justify-content: space-around;
 `;
 
@@ -73,10 +51,48 @@ export const ItemDescription = styled.Text`
   text-align: left;
   font-family: Helvetica;
 `;
+export const ItemPrice = styled.Text`
+  font-size: 16px;
+  color: #0b2031;
+  letter-spacing: 0;
+  text-align: left;
+  font-weight: bold;
+`;
 
 export const ItemTime = styled.Text`
   font-size: 10;
   color: #706e7b;
   letter-spacing: 0.46;
   text-align: left;
+`;
+export const BottomContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 500px;
+`;
+
+export const BackToMenu = styled.TouchableOpacity`
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 20px;
+`;
+
+export const FinishOrder = styled.TouchableOpacity`
+  background-color: #e5293e;
+  border-radius: 20px;
+  /* height: 30px; */
+  /* width: 200px; */
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export const ButtonText = styled.Text`
+  font-family: Helvetica-Bold;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
 `;

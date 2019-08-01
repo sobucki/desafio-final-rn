@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { ImageBackground } from 'react-native';
 import {
   Container,
   HeaderContainer,
@@ -13,6 +13,7 @@ import {
   ItemName,
   ItemDescription,
   ItemTime,
+  BackgroundImage,
 } from './styles';
 
 const data = [
@@ -54,6 +55,16 @@ export default class Menu extends Component {
   render() {
     return (
       <Container>
+        <ImageBackground
+          source={require('../../Assets/images/headers/header-background.png')}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 150,
+          }}
+        />
         <HeaderContainer>
           <Icon name="restore-clock" size={35} color="#fff" />
           <LocalName>Pizzaria Don Juan</LocalName>
