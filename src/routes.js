@@ -5,6 +5,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 // import Menu from './pages/Menu';
 import Flavor from './pages/Flavor';
+import Size from './pages/Size';
 // import Repositories from './pages/Repositories';
 
 const Routes = createAppContainer(
@@ -12,7 +13,8 @@ const Routes = createAppContainer(
     // Login,
     // CreateAccount,
     // Menu,
-    Flavor,
+    // Flavor,
+    Size,
   }),
 );
 
