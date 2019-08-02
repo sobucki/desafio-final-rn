@@ -13,5 +13,5 @@ export const HeaderImageBackground = styled.ImageBackground.attrs({
   top: 0;
   left: 0;
   right: 0;
-  height: 150;
+  height: 200px;
 `;

@@ -7,16 +7,18 @@ import Menu from './pages/Menu';
 import Flavor from './pages/Flavor';
 import Size from './pages/Size';
 import Cart from './pages/Cart';
+import HistoryOrder from './pages/HistoryOrder';
 // import Repositories from './pages/Repositories';
 
 const Routes = createAppContainer(
   createSwitchNavigator({
     // Login,
-    CreateAccount,
+    // CreateAccount,
     // Menu,
     // Flavor,
     // Size,
     // Cart,
+    HistoryOrder,
   }),
 );
 
