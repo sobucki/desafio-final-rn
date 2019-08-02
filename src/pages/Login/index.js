@@ -12,6 +12,7 @@ import {
   TextEnter,
   CreateAccountText,
 } from './styles';
+import BackgroundCoverGradient from '~/components/BackgroundCoverGradient';
 
 export default class Login extends Component {
   componentDidMount() {}
@@ -23,27 +24,25 @@ export default class Login extends Component {
 
   render() {
     return (
-      <BackgroundImage>
-        <Gradient>
-          <Container>
-            <ImageContainer style={{ alignItems: 'center' }}>
-              <LogoPizza />
-            </ImageContainer>
+      <BackgroundCoverGradient>
+        <Container>
+          <ImageContainer style={{ alignItems: 'center' }}>
+            <LogoPizza />
+          </ImageContainer>
 
-            <Email placeholder="Seu e-mail" />
+          <Email placeholder="Seu e-mail" />
 
-            <Password placeholder="Senha secreta" />
+          <Password placeholder="Senha secreta" />
 
-            <EnterButton>
-              <TextEnter>Entrar</TextEnter>
-            </EnterButton>
+          <EnterButton>
+            <TextEnter>Entrar</TextEnter>
+          </EnterButton>
 
-            <CreateAccountText onPress={() => this.goToCreateAccount()}>
-              Criar conta gratuita
-            </CreateAccountText>
-          </Container>
-        </Gradient>
-      </BackgroundImage>
+          <CreateAccountText onPress={() => this.goToCreateAccount()}>
+            Criar conta gratuita
+          </CreateAccountText>
+        </Container>
+      </BackgroundCoverGradient>
     );
   }
 }

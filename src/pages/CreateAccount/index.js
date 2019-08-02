@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
 import {
-  BackgroundImage,
   Container,
   ImageContainer,
   Name,
   Email,
-  Gradient,
   LogoPizza,
   Password,
   EnterButton,
   TextEnter,
   OptionText,
 } from './styles';
+
+import BackgroundCoverGradient from '~/components/BackgroundCoverGradient';
 
 export default class CreateAccount extends Component {
   componentDidMount() {}
@@ -24,26 +24,24 @@ export default class CreateAccount extends Component {
 
   render() {
     return (
-      <BackgroundImage>
-        <Gradient>
-          <Container>
-            <ImageContainer style={{ alignItems: 'center' }}>
-              <LogoPizza />
-            </ImageContainer>
+      <BackgroundCoverGradient>
+        <Container>
+          <ImageContainer style={{ alignItems: 'center' }}>
+            <LogoPizza />
+          </ImageContainer>
 
-            <Name placeholder="Nome completo" />
-            <Email placeholder="Seu e-mail" />
+          <Name placeholder="Nome completo" />
+          <Email placeholder="Seu e-mail" />
 
-            <Password placeholder="Senha secreta" />
+          <Password placeholder="Senha secreta" />
 
-            <EnterButton>
-              <TextEnter>Criar conta</TextEnter>
-            </EnterButton>
+          <EnterButton>
+            <TextEnter>Criar conta</TextEnter>
+          </EnterButton>
 
-            <OptionText onPress={() => this.gotToLogin()}>Já tenho login</OptionText>
-          </Container>
-        </Gradient>
-      </BackgroundImage>
+          <OptionText onPress={() => this.gotToLogin()}>Já tenho login</OptionText>
+        </Container>
+      </BackgroundCoverGradient>
     );
   }
 }

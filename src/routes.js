@@ -1,7 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-// import Login from './pages/Login';
-// import CreateAccount from './pages/CreateAccount';
+import Login from './pages/Login';
+import CreateAccount from './pages/CreateAccount';
 
 import Menu from './pages/Menu';
 import Flavor from './pages/Flavor';
@@ -12,8 +12,8 @@ import Cart from './pages/Cart';
 const Routes = createAppContainer(
   createSwitchNavigator({
     // Login,
-    // CreateAccount,
-    Menu,
+    CreateAccount,
+    // Menu,
     // Flavor,
     // Size,
     // Cart,
