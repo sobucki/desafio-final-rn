@@ -17,6 +17,7 @@ import {
   FinishOrder,
   ButtonText,
 } from './styles';
+import DefaultContainer from '~/components/DefaultContainer';
 
 const data = [
   {
@@ -44,7 +45,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <Container>
+      <DefaultContainer>
         <ContainerList>
           <MenuList
             data={data}
@@ -72,7 +73,7 @@ export default class Menu extends Component {
             <Icon name="chevron-right" size={20} color="#fff" />
           </FinishOrder>
         </BottomContainer>
-      </Container>
+      </DefaultContainer>
     );
   }
 }

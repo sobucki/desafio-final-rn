@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ItemList from '~/components/ItemList';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,17 +11,15 @@ export const Container = styled.View`
 export const ContainerList = styled.View``;
 
 export const MenuList = styled.FlatList`
-  /* margin: 20px; */
-  /* background-color: blueviolet; */
+  /* margin: 10px; */
+  /* background-color: blueviolet;  */
 `;
 
-export const MenuItem = styled.View`
+export const MenuItem = styled(ItemList)`
   flex-direction: row;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-bottom: 15px;
-  background-color: #fff;
-  border-radius: 5px;
-  align-items: center;
-  padding: 15px;
 `;
 
 export const ItemCover = styled.Image`
@@ -68,7 +67,7 @@ export const ItemTime = styled.Text`
 export const BottomContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 500px;
+  margin: 10px;
 `;
 
 export const BackToMenu = styled.TouchableOpacity`

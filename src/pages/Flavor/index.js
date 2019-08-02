@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   Container, TypeList, TypeImage, TypeItem, DescriptionText,
 } from './styles';
+import DefaultContainer from '~/components/DefaultContainer';
 
 const data = [
   {
@@ -42,7 +43,7 @@ export default class Flavor extends Component {
 
   render() {
     return (
-      <Container>
+      <DefaultContainer>
         <TypeList
           data={data}
           keyExtractor={item => String(item.id)}
@@ -53,7 +54,7 @@ export default class Flavor extends Component {
             </TypeItem>
           )}
         />
-      </Container>
+      </DefaultContainer>
     );
   }
 }

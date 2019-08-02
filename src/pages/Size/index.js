@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import {
   Container, TypeImage, SizeList, SizeItem, DescriptionText, PriceText,
 } from './styles';
+import DefaultContainer from '~/components/DefaultContainer';
 
 const data = [
   {
@@ -38,7 +39,7 @@ export default class Size extends Component {
 
   render() {
     return (
-      <Container>
+      <DefaultContainer>
         <SizeList
           data={data}
           keyExtractor={item => String(item.id)}
@@ -50,7 +51,7 @@ export default class Size extends Component {
             </SizeItem>
           )}
         />
-      </Container>
+      </DefaultContainer>
     );
   }
 }

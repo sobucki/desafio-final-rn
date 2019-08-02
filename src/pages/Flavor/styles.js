@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import { metrics } from '~/styles';
+import ItemList from '~/components/ItemList';
 
 export const Container = styled.View`
   flex: 1;
@@ -14,11 +15,9 @@ export const TypeList = styled.FlatList.attrs({
   margin: 5px;
 `;
 
-export const TypeItem = styled.View`
+export const TypeItem = styled(ItemList)`
   flex: 1;
-  background-color: #fff;
   margin: 5px;
-  border-radius: 5px;
   justify-content: center;
   align-items: center;
   height: ${metrics.screenWidth / 1.9};
@@ -33,5 +32,5 @@ export const DescriptionText = styled.Text`
   color: #0b2031;
   letter-spacing: 0;
   text-align: center;
-  font-weight:bold;
+  font-weight: bold;
 `;

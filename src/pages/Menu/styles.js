@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import BackgroundPicture from '~/Assets/images/headers/header-background.png';
+import ItemList from '~/components/ItemList';
 
 export const BackgroundImage = styled.ImageBackground.attrs({
   source: BackgroundPicture,
@@ -33,16 +34,16 @@ export const LocalName = styled.Text`
 `;
 
 export const MenuList = styled.FlatList`
-  margin: 20px;
+  /* margin: 20px;  */
 `;
 
-export const MenuItem = styled.View`
+export const MenuItem = styled(ItemList)`
   flex-direction: row;
-  margin-bottom: 15px;
-  background-color: #fff;
-  border-radius: 5px;
+
   align-items: center;
-  padding: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 `;
 
 export const ItemCover = styled.Image`

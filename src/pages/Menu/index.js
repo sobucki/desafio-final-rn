@@ -15,6 +15,7 @@ import {
   ItemTime,
   BackgroundImage,
 } from './styles';
+import DefaultContainer from '~/components/DefaultContainer';
 
 const data = [
   {
@@ -54,17 +55,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <Container>
-        <ImageBackground
-          source={require('../../Assets/images/headers/header-background.png')}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 150,
-          }}
-        />
+      <DefaultContainer>
         <HeaderContainer>
           <Icon name="restore-clock" size={35} color="#fff" />
           <LocalName>Pizzaria Don Juan</LocalName>
@@ -88,7 +79,7 @@ export default class Menu extends Component {
             </MenuItem>
           )}
         />
-      </Container>
+      </DefaultContainer>
     );
   }
 }

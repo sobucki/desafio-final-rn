@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import { metrics } from '~/styles';
+import ItemList from '~/components/ItemList';
 
 export const Container = styled.View`
   flex: 1;
@@ -14,11 +15,9 @@ export const SizeList = styled.FlatList.attrs({
   margin: 5px;
 `;
 
-export const SizeItem = styled.View`
+export const SizeItem = styled(ItemList)`
   flex: 1;
-  background-color: #fff;
   margin: 5px;
-  border-radius: 5px;
   justify-content: center;
   align-items: center;
   height: ${metrics.screenWidth / 1.9};
