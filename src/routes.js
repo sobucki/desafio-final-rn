@@ -8,6 +8,7 @@ import Flavor from './pages/Flavor';
 import Size from './pages/Size';
 import Cart from './pages/Cart';
 import HistoryOrder from './pages/HistoryOrder';
+import FinishOrder from './pages/FinishOrder';
 // import Repositories from './pages/Repositories';
 
 const Routes = createAppContainer(
@@ -18,7 +19,8 @@ const Routes = createAppContainer(
     // Flavor,
     // Size,
     // Cart,
-    HistoryOrder,
+    // HistoryOrder,
+    FinishOrder,
   }),
 );
 
