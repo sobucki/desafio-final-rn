@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
+import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ImageBackground } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
-  Container,
   HeaderContainer,
   LocalName,
   MenuList,
@@ -13,7 +12,6 @@ import {
   ItemName,
   ItemDescription,
   ItemTime,
-  BackgroundImage,
 } from './styles';
 import DefaultContainer from '~/components/DefaultContainer';
 
@@ -51,22 +49,58 @@ const data = [
 ];
 
 export default class Menu extends Component {
+  static navigationOptions = () => ({
+    title: 'Pizzaria Don Juan',
+
+    // headerStyle: {
+    //   // borderBottomWidth: 0,
+    // },
+    headerRight: (
+      <TouchableOpacity
+        style={{
+          backgroundColor: '#e5293e',
+          marginRight: 20,
+          height: 40,
+          width: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 20,
+        }}
+      >
+        <Icon name="shopping" size={22} color="#fff" />
+      </TouchableOpacity>
+    ),
+    headerLeft: (
+      <TouchableOpacity
+        style={{
+          marginLeft: 20,
+          height: 40,
+          width: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 20,
+        }}
+      >
+        <Icon name="history" size={22} color="#fff" />
+      </TouchableOpacity>
+    ),
+  });
+
   componentDidMount() {}
+
+  goToNext() {
+    const { navigation } = this.props;
+    navigation.navigate('Flavor');
+  }
 
   render() {
     return (
       <DefaultContainer>
-        <HeaderContainer>
-          <Icon name="restore-clock" size={35} color="#fff" />
-          <LocalName>Pizzaria Don Juan</LocalName>
-          <Icon name="restore-clock" size={35} color="#fff" />
-        </HeaderContainer>
         <MenuList
           data={data}
-          showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.name)}
           renderItem={({ item }) => (
-            <MenuItem>
+            <MenuItem onPress={() => this.goToNext()}>
               <ItemCover source={item.image} />
               <InfoItemContainer>
                 <ItemName>{item.name}</ItemName>

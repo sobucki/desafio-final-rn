@@ -35,7 +35,16 @@ const data = [
 ];
 
 export default class Size extends Component {
+  static navigationOptions = () => ({
+    title: 'Selecione um tamanho',
+  });
+
   componentDidMount() {}
+
+  goToNext() {
+    const { navigation } = this.props;
+    navigation.navigate('Cart');
+  }
 
   render() {
     return (
@@ -44,7 +53,7 @@ export default class Size extends Component {
           data={data}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <SizeItem>
+            <SizeItem onPress={() => this.goToNext()}>
               <TypeImage source={item.image} />
               <DescriptionText>{item.type}</DescriptionText>
               <PriceText>{`R$${item.price}`}</PriceText>

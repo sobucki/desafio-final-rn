@@ -2,16 +2,25 @@ import '~/config/ReactotronConfig';
 import '~/config/DevToolsConfig';
 import '~/config/StatusBarConfig';
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import { Provider } from 'react-redux';
-import Routes from '~/routes';
 import store from '~/store';
 
-const App = () => (
-  <Provider store={store}>
-    <Routes />
-  </Provider>
-);
+import createNavigator from './routes';
 
-export default App;
+export default class App extends Component {
+  state = {
+    userLogged: true,
+  };
+
+  render() {
+    const { userLogged } = this.state;
+    const Routes = createNavigator(userLogged);
+    return (
+      <Provider store={store}>
+        <Routes />
+      </Provider>
+    );
+  }
+}

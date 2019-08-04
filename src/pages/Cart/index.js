@@ -41,7 +41,16 @@ const data = [
 ];
 
 export default class Menu extends Component {
+  static navigationOptions = () => ({
+    title: 'Carrinho',
+  });
+
   componentDidMount() {}
+
+  gotToNext() {
+    const { navigation } = this.props;
+    navigation.navigate('FinishOrder');
+  }
 
   render() {
     return (
@@ -68,7 +77,7 @@ export default class Menu extends Component {
           <BackToMenu>
             <Icon name="cart-plus" size={20} color="#666666" />
           </BackToMenu>
-          <FinishOrder>
+          <FinishOrder onPress={() => this.gotToNext()}>
             <ButtonText>REALIZAR PEDIDO</ButtonText>
             <Icon name="chevron-right" size={20} color="#fff" />
           </FinishOrder>

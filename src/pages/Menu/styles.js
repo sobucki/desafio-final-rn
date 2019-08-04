@@ -1,17 +1,6 @@
 import styled from 'styled-components/native';
 
-import BackgroundPicture from '~/Assets/images/headers/header-background.png';
 import ItemList from '~/components/ItemList';
-
-export const BackgroundImage = styled.ImageBackground.attrs({
-  source: BackgroundPicture,
-  // resizeMode: 'contain',
-})`
-  flex: 1;
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: 0; */
-`;
 
 export const Container = styled.View`
   flex: 1;
@@ -33,9 +22,10 @@ export const LocalName = styled.Text`
   text-align: left;
 `;
 
-export const MenuList = styled.FlatList`
-  /* margin: 20px;  */
-`;
+export const MenuList = styled.FlatList.attrs({
+  contentContainerStyle: { paddingBottom: 20, paddingTop: 20 },
+  showsVerticalScrollIndicator: false,
+})``;
 
 export const MenuItem = styled(ItemList)`
   flex-direction: row;

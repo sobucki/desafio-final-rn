@@ -39,7 +39,16 @@ const data = [
 ];
 
 export default class Flavor extends Component {
+  static navigationOptions = () => ({
+    title: 'Selecione um tipo',
+  });
+
   componentDidMount() {}
+
+  gotToNext() {
+    const { navigation } = this.props;
+    navigation.navigate('Size');
+  }
 
   render() {
     return (
@@ -48,7 +57,7 @@ export default class Flavor extends Component {
           data={data}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <TypeItem>
+            <TypeItem onPress={() => this.gotToNext()}>
               <TypeImage source={item.image} />
               <DescriptionText>{item.type}</DescriptionText>
             </TypeItem>
