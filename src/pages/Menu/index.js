@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { ActivityIndicator } from 'react-native';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
-  HeaderContainer,
-  LocalName,
   MenuList,
   MenuItem,
   ItemCover,
@@ -14,41 +16,10 @@ import {
   ItemTime,
 } from './styles';
 import DefaultContainer from '~/components/DefaultContainer';
+import DefaultImage from '~/Assets/images/pizza.jpg';
+import CatalogAction from '~/store/ducks/catalog';
 
-const data = [
-  {
-    name: 'Pizza',
-    description: 'Mais de 50 sabores de pizza em até 4 tamanhos diferentes de fome.',
-    time: '30 mins',
-    image: require('../../Assets/images/pizza.jpg'),
-  },
-  {
-    name: 'Massa',
-    description: '10 tipos de massas com diferentes molhos para te satisfazer.',
-    time: '25 mins',
-    image: require('../../Assets/images/pasta.jpg'),
-  },
-  {
-    name: 'Calzones',
-    description: 'Calzones super recheados com mais de 50 sabores diferentes.',
-    time: '15 mins',
-    image: require('../../Assets/images/calzone.jpg'),
-  },
-  {
-    name: 'Bebidas não-alcóolicas',
-    description: 'Refrigerantes, sucos, chá gelado, energéticos e água.',
-    time: '5 mins',
-    image: require('../../Assets/images/coke.jpg'),
-  },
-  {
-    name: 'Bebidas alcóolicas',
-    description: 'Cervejas artesanais, vinhos e destilados.',
-    time: '5 mins',
-    image: require('../../Assets/images/cerveja.jpg'),
-  },
-];
-
-export default class Menu extends Component {
+class Menu extends Component {
   static navigationOptions = () => ({
     title: 'Pizzaria Don Juan',
 
@@ -86,7 +57,14 @@ export default class Menu extends Component {
     ),
   });
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.loadCategories();
+  }
+
+  loadCategories = () => {
+    const { loadCategoriesRequest } = this.props;
+    loadCategoriesRequest();
+  };
 
   goToNext() {
     const { navigation } = this.props;
@@ -94,14 +72,20 @@ export default class Menu extends Component {
   }
 
   render() {
+    const { categories, loading } = this.props;
     return (
       <DefaultContainer>
+        {/* {loading ? (
+          <ActivityIndicator />
+        ) : ( */}
         <MenuList
-          data={data}
-          keyExtractor={item => String(item.name)}
+          data={categories}
+          keyExtractor={item => String(item.id)}
+          onRefresh={this.loadCategories.bind(this)}
+          refreshing={loading}
           renderItem={({ item }) => (
             <MenuItem onPress={() => this.goToNext()}>
-              <ItemCover source={item.image} />
+              <ItemCover source={item.cover ? { uri: item.cover.url } : DefaultImage} />
               <InfoItemContainer>
                 <ItemName>{item.name}</ItemName>
                 <ItemDescription>{item.description}</ItemDescription>
@@ -113,7 +97,20 @@ export default class Menu extends Component {
             </MenuItem>
           )}
         />
+        {/* )} */}
       </DefaultContainer>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  categories: state.catalog.categories,
+  loading: state.catalog.loading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CatalogAction, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Menu);

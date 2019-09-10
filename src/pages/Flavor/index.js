@@ -41,6 +41,7 @@ const data = [
 export default class Flavor extends Component {
   static navigationOptions = () => ({
     title: 'Selecione um tipo',
+    
   });
 
   componentDidMount() {}
