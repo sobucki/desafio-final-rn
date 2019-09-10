@@ -66,9 +66,9 @@ class Menu extends Component {
     loadCategoriesRequest();
   };
 
-  goToNext() {
+  goToNext(categoryId) {
     const { navigation } = this.props;
-    navigation.navigate('Flavor');
+    navigation.navigate('Flavor', { categoryId });
   }
 
   render() {
@@ -81,10 +81,10 @@ class Menu extends Component {
         <MenuList
           data={categories}
           keyExtractor={item => String(item.id)}
-          onRefresh={this.loadCategories.bind(this)}
+          onRefresh={this.loadCategories}
           refreshing={loading}
           renderItem={({ item }) => (
-            <MenuItem onPress={() => this.goToNext()}>
+            <MenuItem onPress={() => this.goToNext(item.id)}>
               <ItemCover source={item.cover ? { uri: item.cover.url } : DefaultImage} />
               <InfoItemContainer>
                 <ItemName>{item.name}</ItemName>

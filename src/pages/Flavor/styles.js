@@ -23,7 +23,10 @@ export const TypeItem = styled(ItemList)`
   height: ${metrics.screenWidth / 1.9};
 `;
 
-export const TypeImage = styled.Image``;
+export const TypeImage = styled.Image`
+  width: 79px;
+  height: 79px;
+`;
 
 export const DescriptionText = styled.Text`
   margin-top: 15px;

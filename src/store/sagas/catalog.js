@@ -13,3 +13,12 @@ export function* loadCategories() {
     // yield put(CatalogActions.loadCategoriesFailure());
   }
 }
+export function* loadProducts({ categoryId }) {
+  try {
+    const response = yield call(api.get, `categories/${categoryId}/products`);
+
+    yield put(CatalogActions.loadProductsSuccess(response.data));
+  } catch (error) {
+    console.tron.log(error);
+  }
+}

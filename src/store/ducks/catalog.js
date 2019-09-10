@@ -6,6 +6,10 @@ const { Types, Creators } = createActions({
   loadCategoriesRequest: null,
   loadCategoriesSuccess: ['data'],
   loadCategoriesFailure: null,
+
+  loadProductsRequest: ['categoryId'],
+  loadProductsSuccess: ['data'],
+  loadProductsFailure: null,
 });
 
 export const CatalogTypes = Types;
@@ -13,10 +17,14 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   categories: [],
+  products: [],
   loading: false,
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOAD_CATEGORIES_REQUEST]: state => state.merge({ loading: true }),
   [Types.LOAD_CATEGORIES_SUCCESS]: (state, { data }) => state.merge({ categories: data, loading: false }),
+
+  [Types.LOAD_PRODUCTS_REQUEST]: state => state.merge({ loading: true }),
+  [Types.LOAD_PRODUCTS_SUCCESS]: (state, { data }) => state.merge({ products: data, loading: false }),
 });

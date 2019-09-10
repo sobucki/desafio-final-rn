@@ -1,50 +1,37 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import {
-  Container, TypeList, TypeImage, TypeItem, DescriptionText,
+  TypeList, TypeImage, TypeItem, DescriptionText,
 } from './styles';
 import DefaultContainer from '~/components/DefaultContainer';
+import DefaultImage from '~/Assets/images/pizza.jpg';
 
-const data = [
-  {
-    id: 1,
-    type: 'Portuguesa',
-    image: require('../../Assets/images/pizzas/1.png'),
-  },
-  {
-    id: 2,
-    type: 'Calabresa',
-    image: require('../../Assets/images/pizzas/2.png'),
-  },
-  {
-    id: 3,
-    type: 'Frango Frito',
-    image: require('../../Assets/images/pizzas/3.png'),
-  },
-  {
-    id: 4,
-    type: 'Marguerita',
-    image: require('../../Assets/images/pizzas/4.png'),
-  },
-  {
-    id: 5,
-    type: 'Bacon',
-    image: require('../../Assets/images/pizzas/5.png'),
-  },
-  {
-    id: 6,
-    type: 'Quatro Queijos',
-    image: require('../../Assets/images/pizzas/6.png'),
-  },
-];
+import CatalogAction from '~/store/ducks/catalog';
 
-export default class Flavor extends Component {
+class Flavor extends Component {
   static navigationOptions = () => ({
     title: 'Selecione um tipo',
-    
   });
 
-  componentDidMount() {}
+  state = {
+    selectedCategory: 1,
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const categoryId = navigation.getParam('categoryId');
+    this.setState({ selectedCategory : categoryId });
+    this.loadProductsByCategoryId(categoryId);
+  }
+
+  loadProductsByCategoryId = (categoryId) => {
+    const { loadProductsRequest } = this.props;
+    loadProductsRequest(categoryId);
+    console.tron.log(categoryId);
+  }
 
   gotToNext() {
     const { navigation } = this.props;
@@ -52,15 +39,19 @@ export default class Flavor extends Component {
   }
 
   render() {
+    const { products, loading } = this.props;
+    const { selectedCategory } = this.state;
     return (
       <DefaultContainer>
         <TypeList
-          data={data}
+          data={products}
           keyExtractor={item => String(item.id)}
+          onRefresh={() => this.loadProductsByCategoryId(selectedCategory)}
+          refreshing={loading}
           renderItem={({ item }) => (
             <TypeItem onPress={() => this.gotToNext()}>
-              <TypeImage source={item.image} />
-              <DescriptionText>{item.type}</DescriptionText>
+              <TypeImage source={item.cover ? { uri: item.cover.url } : DefaultImage} />
+              <DescriptionText>{item.description}</DescriptionText>
             </TypeItem>
           )}
         />
@@ -68,3 +59,15 @@ export default class Flavor extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  products: state.catalog.products,
+  loading: state.catalog.loading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CatalogAction, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Flavor);
