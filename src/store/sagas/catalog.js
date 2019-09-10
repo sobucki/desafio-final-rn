@@ -22,3 +22,12 @@ export function* loadProducts({ categoryId }) {
     console.tron.log(error);
   }
 }
+export function* loadItems({ productId }) {
+  try {
+    const response = yield call(api.get, `products/${productId}/items`);
+
+    yield put(CatalogActions.loadItemsSuccess(response.data));
+  } catch (error) {
+    console.tron.log(error);
+  }
+}

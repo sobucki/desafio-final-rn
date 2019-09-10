@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
 
-import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import {
-  Container, TypeImage, SizeList, SizeItem, DescriptionText, PriceText,
+  TypeImage, SizeList, SizeItem, DescriptionText, PriceText,
 } from './styles';
 import DefaultContainer from '~/components/DefaultContainer';
+import DefaultImage from '~/Assets/images/pizza.jpg';
 
-const data = [
-  {
-    id: 1,
-    type: 'Gigante',
-    price: 76,
-    image: require('../../Assets/images/sizes/tamanho-gg.png'),
-  },
-  {
-    id: 2,
-    type: 'Grande',
-    price: 59,
-    image: require('../../Assets/images/sizes/tamanho-g.png'),
-  },
-  {
-    id: 3,
-    type: 'Média',
-    price: 42,
-    image: require('../../Assets/images/sizes/tamanho-m.png'),
-  },
-  {
-    id: 4,
-    type: 'Pequena',
-    price: 29,
-    image: require('../../Assets/images/sizes/tamanho-p.png'),
-  },
-];
+import CatalogAction from '~/store/ducks/catalog';
 
-export default class Size extends Component {
+class Size extends Component {
   static navigationOptions = () => ({
     title: 'Selecione um tamanho',
   });
 
-  componentDidMount() {}
+  state = {
+    selectedProductId : 0
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const productId = navigation.getParam('productId');
+    this.setState({ selectedProductId : productId });
+    this.loadItemsByProductId(productId);
+  }
+
+  loadItemsByProductId = (productId) => {
+    const { loadItemsRequest } = this.props;
+    loadItemsRequest(productId);
+  }
 
   goToNext() {
     const { navigation } = this.props;
@@ -47,15 +38,20 @@ export default class Size extends Component {
   }
 
   render() {
+    const { items, loading } = this.props;
+    const { selectedProductId } = this.state;
+    console.tron.log(selectedProductId);
     return (
       <DefaultContainer>
         <SizeList
-          data={data}
+          data={items}
           keyExtractor={item => String(item.id)}
+          onRefresh={() => this.loadItemsByProductId(selectedProductId)}
+          refreshing={loading}
           renderItem={({ item }) => (
             <SizeItem onPress={() => this.goToNext()}>
-              <TypeImage source={item.image} />
-              <DescriptionText>{item.type}</DescriptionText>
+              <TypeImage source={item.cover ? { uri: item.cover.url } : DefaultImage} />
+              <DescriptionText>{item.size}</DescriptionText>
               <PriceText>{`R$${item.price}`}</PriceText>
             </SizeItem>
           )}
@@ -64,3 +60,15 @@ export default class Size extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  items: state.catalog.items,
+  loading: state.catalog.loading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CatalogAction, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Size);

@@ -2,13 +2,12 @@ import { all, takeLatest } from 'redux-saga/effects';
 
 import { CatalogTypes } from '~/store/ducks/catalog';
 
-import { loadCategories, loadProducts } from './catalog';
+import { loadCategories, loadProducts, loadItems } from './catalog';
 
 export default function* rootSaga() {
   return yield all([
     takeLatest(CatalogTypes.LOAD_CATEGORIES_REQUEST, loadCategories),
     takeLatest(CatalogTypes.LOAD_PRODUCTS_REQUEST, loadProducts),
-    // takeLatest(CatalogTypes.LOAD_CATEGORIES_REQUEST, loadCategories),
-    // takeLatest(CatalogTypes.LOAD_PRODUCTS_REQUEST, loadProducts),
+    takeLatest(CatalogTypes.LOAD_ITEMS_REQUEST, loadItems),
   ]);
 }

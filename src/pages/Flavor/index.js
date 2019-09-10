@@ -30,12 +30,11 @@ class Flavor extends Component {
   loadProductsByCategoryId = (categoryId) => {
     const { loadProductsRequest } = this.props;
     loadProductsRequest(categoryId);
-    console.tron.log(categoryId);
   }
 
-  gotToNext() {
+  gotToNext(productId) {
     const { navigation } = this.props;
-    navigation.navigate('Size');
+    navigation.navigate('Size', {productId});
   }
 
   render() {
@@ -49,7 +48,7 @@ class Flavor extends Component {
           onRefresh={() => this.loadProductsByCategoryId(selectedCategory)}
           refreshing={loading}
           renderItem={({ item }) => (
-            <TypeItem onPress={() => this.gotToNext()}>
+            <TypeItem onPress={() => this.gotToNext(item.id)}>
               <TypeImage source={item.cover ? { uri: item.cover.url } : DefaultImage} />
               <DescriptionText>{item.description}</DescriptionText>
             </TypeItem>
