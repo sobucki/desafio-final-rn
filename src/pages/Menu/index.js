@@ -20,7 +20,7 @@ import DefaultImage from '~/Assets/images/pizza.jpg';
 import CatalogAction from '~/store/ducks/catalog';
 
 class Menu extends Component {
-  static navigationOptions = () => ({
+  static navigationOptions = ({ navigation }) => ({
     title: 'Pizzaria Don Juan',
 
     // headerStyle: {
@@ -28,6 +28,9 @@ class Menu extends Component {
     // },
     headerRight: (
       <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Cart');
+        }}
         style={{
           backgroundColor: '#e5293e',
           marginRight: 20,
@@ -64,6 +67,11 @@ class Menu extends Component {
   loadCategories = () => {
     const { loadCategoriesRequest } = this.props;
     loadCategoriesRequest();
+  };
+
+  goToCart = () => {
+    const { navigation } = this.props;
+    navigation.navigate('Cart');
   };
 
   goToNext(categoryId) {

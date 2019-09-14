@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
-import ItemList from '~/components/ItemList';
+import ItemButtonList from '~/components/ItemButtonList';
 
 export const Container = styled.View``;
 
-export const MenuItem = styled(ItemList)`
+export const MenuItem = styled(ItemButtonList)`
   /* flex-direction: row; */
   align-items: flex-start;
   margin-left: 15px;

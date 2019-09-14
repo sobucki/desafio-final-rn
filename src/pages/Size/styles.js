@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 import { metrics } from '~/styles';
-import ItemList from '~/components/ItemList';
+import ItemButtonList from '~/components/ItemButtonList';
 
 export const Container = styled.View`
   flex: 1;
@@ -15,7 +15,7 @@ export const SizeList = styled.FlatList.attrs({
   margin: 5px;
 `;
 
-export const SizeItem = styled(ItemList)`
+export const SizeItem = styled(ItemButtonList)`
   flex: 1;
   margin: 5px;
   justify-content: center;

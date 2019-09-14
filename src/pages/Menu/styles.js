@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import ItemList from '~/components/ItemList';
+import ItemButtonList from '~/components/ItemButtonList';
 
 export const Container = styled.View`
   flex: 1;
@@ -27,7 +27,7 @@ export const MenuList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })``;
 
-export const MenuItem = styled(ItemList)`
+export const MenuItem = styled(ItemButtonList)`
   flex-direction: row;
 
   align-items: center;

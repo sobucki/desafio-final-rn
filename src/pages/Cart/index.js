@@ -1,9 +1,14 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
-  Container,
   ContainerList,
   MenuList,
   MenuItem,
@@ -18,63 +23,73 @@ import {
   ButtonText,
 } from './styles';
 import DefaultContainer from '~/components/DefaultContainer';
+import CartAction from '~/store/ducks/cart';
+import DefaultImage from '~/Assets/images/pizza.jpg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const data = [
-  {
-    name: 'Pizza Calabresa',
-    size: 'Tamanho: Média',
-    price: 42,
-    image: require('../../Assets/images/pizzas/2.png'),
-  },
-  {
-    name: 'Pizza 4 Queijos',
-    size: 'Tamanho: Pequena',
-    price: 29,
-    image: require('../../Assets/images/pizzas/3.png'),
-  },
-  {
-    name: 'Coca Cola',
-    size: 'Lata 300ML',
-    price: 6,
-    image: require('../../Assets/images/calzone.jpg'),
-  },
-];
+class Cart extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const totalValue = navigation.getParam('totalValue', 0);
+    console.tron.log(totalValue);
+    return {
+      title: 'Carrinho',
+      headerRight: <Text>{totalValue}</Text>,
+    };
+  };
 
-export default class Menu extends Component {
-  static navigationOptions = () => ({
-    title: 'Carrinho',
-  });
+  componentWillMount() {
+    this.updateCount();
+  }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.updateCount();
+  }
+
+  updateCount() {
+    const { navigation, totalValue } = this.props;
+    navigation.setParams({ totalValue });
+  }
 
   gotToNext() {
     const { navigation } = this.props;
     navigation.navigate('FinishOrder');
   }
 
+  goToMenu() {
+    const { navigation } = this.props;
+    navigation.navigate('Menu');
+  }
+
   render() {
+    const { items } = this.props;
+
     return (
       <DefaultContainer>
         <ContainerList>
           <MenuList
-            data={data}
+            data={items}
             showsVerticalScrollIndicator={false}
-            keyExtractor={item => String(item.name)}
+            keyExtractor={item => String(item.idCart)}
             renderItem={({ item }) => (
               <MenuItem>
-                <ItemCover source={item.image} />
+                <ItemCover
+                  source={item.product.cover ? { uri: item.product.cover.url } : DefaultImage}
+                />
                 <InfoItemContainer>
-                  <ItemName>{item.name}</ItemName>
+                  <ItemName>{item.product.description}</ItemName>
                   <ItemDescription>{item.size}</ItemDescription>
                   <ItemPrice>{`R$${item.price}`}</ItemPrice>
                 </InfoItemContainer>
-                <Icon name="delete-forever" size={20} color="#e5293e" />
+                <TouchableOpacity>
+                  <Icon name="delete-forever" size={28} color="#e5293e" />
+                </TouchableOpacity>
               </MenuItem>
             )}
           />
         </ContainerList>
         <BottomContainer>
-          <BackToMenu>
+          <BackToMenu onPress={() => this.goToMenu()}>
             <Icon name="cart-plus" size={20} color="#666666" />
           </BackToMenu>
           <FinishOrder onPress={() => this.gotToNext()}>
@@ -86,3 +101,16 @@ export default class Menu extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  items: state.cart.items,
+  totalValue: state.cart.totalValue,
+  loading: state.cart.loading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CartAction, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);

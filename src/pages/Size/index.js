@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
@@ -10,6 +11,7 @@ import DefaultContainer from '~/components/DefaultContainer';
 import DefaultImage from '~/Assets/images/pizza.jpg';
 
 import CatalogAction from '~/store/ducks/catalog';
+import CartAction from '~/store/ducks/cart';
 
 class Size extends Component {
   static navigationOptions = () => ({
@@ -32,15 +34,17 @@ class Size extends Component {
     loadItemsRequest(productId);
   }
 
-  goToNext() {
-    const { navigation } = this.props;
+  goToNext(item) {
+    const { navigation, addItemToCart } = this.props;
     navigation.navigate('Cart');
+
+    addItemToCart(item);
   }
 
   render() {
     const { items, loading } = this.props;
     const { selectedProductId } = this.state;
-    console.tron.log(selectedProductId);
+    
     return (
       <DefaultContainer>
         <SizeList
@@ -49,7 +53,7 @@ class Size extends Component {
           onRefresh={() => this.loadItemsByProductId(selectedProductId)}
           refreshing={loading}
           renderItem={({ item }) => (
-            <SizeItem onPress={() => this.goToNext()}>
+            <SizeItem onPress={() => this.goToNext(item)}>
               <TypeImage source={item.cover ? { uri: item.cover.url } : DefaultImage} />
               <DescriptionText>{item.size}</DescriptionText>
               <PriceText>{`R$${item.price}`}</PriceText>
@@ -66,7 +70,7 @@ const mapStateToProps = state => ({
   loading: state.catalog.loading,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(CatalogAction, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...CatalogAction, ...CartAction }, dispatch);
 
 export default connect(
   mapStateToProps,
